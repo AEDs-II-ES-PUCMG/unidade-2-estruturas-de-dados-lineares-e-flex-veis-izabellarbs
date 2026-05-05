@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Teste {
+public class TestePilha {
     public static void main(String[] args) {
         Pilha<Integer> p = new Pilha<Integer>();
         Scanner teclado = new Scanner(System.in);
