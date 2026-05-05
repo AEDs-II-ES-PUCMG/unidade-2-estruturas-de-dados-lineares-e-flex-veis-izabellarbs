@@ -22,6 +22,8 @@ public class App {
     /** Pilha de pedidos */
     static Pilha<Pedido> pilhaPedidos = new Pilha<>();
         
+    static Pilha<ItemDePedido> pilhaProdutos = new Pilha<ItemDePedido>();
+
     static void limparTela() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -209,14 +211,31 @@ public class App {
      * @param pedido O pedido que deve ser finalizado.
      */
     public static void finalizarPedido(Pedido pedido) {
-    	
-    	// TODO
+        pilhaPedidos.empilhar(pedido);
+
+        ItemDePedido[] itens = pedido.getItensDoPedido();
+
+        for (int i = 0; i < pedido.getQuantItens(); i++) {
+            pilhaProdutos.empilhar(itens[i]);
+        }
     }
     
-    public static void listarProdutosPedidosRecentes() {
-    	
-    	// TODO
+public static void listarProdutosPedidosRecentes() {
+    System.out.println("Quantos dos pedidos mais recentes você deseja listar?: ");
+    int quant = teclado.nextInt();
+
+    if (pilhaProdutos.vazia()) {
+        System.out.println("Não há pedidos cadastrados.");
+        return;
     }
+
+    try {
+        Pilha<ItemDePedido> subpilha = pilhaProdutos.subPilha(quant);
+        System.out.println(subpilha.listaDados());
+    } catch (Exception e) {
+        System.out.println("Não existem pedidos suficientes para listar essa quantidade.");
+    }
+}
     
 	public static void main(String[] args) {
 		

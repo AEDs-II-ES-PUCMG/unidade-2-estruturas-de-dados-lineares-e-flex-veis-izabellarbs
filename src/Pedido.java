@@ -55,6 +55,10 @@ public class Pedido implements Comparable<Pedido> {
 		return null;
 	}
 	
+	public int getQuantItens() {
+    	return quantItensDePedido;
+	}
+
 	/**
      * Inclui produtos no pedido. Se necessário, aumenta a quantidade de itens armazenados no pedido até o momento.
      * Caso o produto já exista no pedido, sua quantidade é atualizada.
